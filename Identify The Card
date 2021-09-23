@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Identify_The_Card
+{
+    public partial class CardIDentifier : Form
+    {
+        public CardIDentifier()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // close the form.
+            this.Close();
+        }
+
+        private void eightOfdiamonds_Click(object sender, EventArgs e)
+        {
+            cardLabel.Text = "Eight of Diamonds";
+        }
+
+        private void twoOfclubs_Click(object sender, EventArgs e)
+        {
+            cardLabel.Text = "Two of Clubs";
+        }
+
+        private void kingOfspades_Click(object sender, EventArgs e)
+        {
+            cardLabel.Text = "King of Spades";
+        }
+
+        private void aceOfspades_Click(object sender, EventArgs e)
+        {
+            cardLabel.Text = "Ace of Spades";
+        }
+
+        private void joKer_Click(object sender, EventArgs e)
+        {
+            cardLabel.Text = "Joker";
+        }
+    }
+}
+
