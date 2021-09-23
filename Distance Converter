@@ -1,0 +1,133 @@
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Distance_Converter_2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
+
+        private void convertButton_Click(object sender, EventArgs e)
+        {
+
+            double distance; // to hold distance entered
+
+
+
+            // validate distance text box
+            if (double.TryParse(distanceTextBox.Text, out distance))
+            {
+                // sent constants
+                const double inchesPerFoot = 12;
+                const double inchesPerYard = 36;
+                const double feetPerYard = 3;
+
+                 // if no input is chosen
+                if (fromListBox.SelectedIndex != -1 && toListBox.SelectedIndex != -1)
+                {
+                    // select from both tables
+                    string selectedItem1, selectedItem2;
+
+                    // select each item from list box
+
+                    selectedItem1 = fromListBox.SelectedItem.ToString();
+                    selectedItem2 = toListBox.SelectedItem.ToString();
+
+                    // if inches & inches if picked
+                    if (selectedItem1 == "Inches" && selectedItem2 == "Inches")
+                    {
+                         // answer is the same
+                        conDistanceLabel.Text = distance.ToString();
+                    }
+                            // inches & feet
+                    if (selectedItem1 == "Inches" && selectedItem2 == "Feet")
+                    {
+                        // convert
+                        double convertedDistance = distance / inchesPerFoot;
+                        conDistanceLabel.Text = convertedDistance.ToString();
+                    }
+                      // inches & yards
+                    if (selectedItem1 == "Inches" && selectedItem2 == "Yards")
+                    {
+                        double convertedDistance = distance / inchesPerYard;
+                        conDistanceLabel.Text = convertedDistance.ToString();
+
+                    }
+                    if (selectedItem1 == "Feet" && selectedItem2 == "Inches")
+                    {
+                        double convertedDistance = distance * inchesPerFoot; ;
+                        conDistanceLabel.Text = convertedDistance.ToString();
+                    }
+                    if (selectedItem1 == "Feet" && selectedItem2 == "Feet")
+                    {
+                        // answer stays the same 
+                        conDistanceLabel.Text = distance.ToString();
+                    }
+                    if (selectedItem1 == "Feet" && selectedItem2 == "Yards")
+                    {
+                        double convertedDistance = distance / feetPerYard;
+                        conDistanceLabel.Text = convertedDistance.ToString();
+                    }
+                    if (selectedItem1 == "Yards" && selectedItem2 == "Inches")
+                    {
+                        double convertedDistance = distance * inchesPerYard;
+                        conDistanceLabel.Text = convertedDistance.ToString();
+                    }
+                    if (selectedItem1 == "Yards" && selectedItem2 == "Feet")
+                    {
+                        
+                        double convertedDistance = distance * feetPerYard;
+                        conDistanceLabel.Text = convertedDistance.ToString();
+                    }
+
+                    // answer stays the same 
+                    if (selectedItem1 == "Yards" && selectedItem2 == "Yards")
+                    {
+                        conDistanceLabel.Text = distance.ToString();
+                    }
+                }
+                else
+                {
+                     // if no box is picked before convert button is clicked 
+                    MessageBox.Show("Please click an item from both lists.");
+                }
+            }
+            else
+            {
+                // if not number and is letters entered
+                MessageBox.Show("The input that you entered is invalid.");
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+            // close 
+            this.Close();
+        }
+    }
+
+
+
+
+
+}
+ 
+
