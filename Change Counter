@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Sales_Prices_Calculator
+{
+    public partial class Form1 : Form
+    {
+
+        // constant
+        const decimal FIVE_CENTS_VALUE = 0.05m;
+        const decimal TEN_CENTS_VALUE = 0.10m;
+        const decimal TWENTY_FIVE_CENTS_VALUE = 0.25m;
+        const decimal FIFTY_CENTS_VALUE = 0.50m;
+        // hold the total
+
+        private decimal total = 0m;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
+
+        private void fiveCentsPictureBox_Click(object sender, EventArgs e)
+        {
+            // add value of 5
+            total += FIVE_CENTS_VALUE;
+            // display as currency
+            totalLabel.Text = total.ToString("c");
+        }
+
+        private void tenCentsPictureBox_Click(object sender, EventArgs e)
+        {
+            // repeat add value of 10
+            total += TEN_CENTS_VALUE;
+
+            totalLabel.Text = total.ToString("c");
+
+
+        }
+
+        private void twentyFiveCentsPictureBox_Click(object sender, EventArgs e)
+        {
+            // add value of 25
+            total += TWENTY_FIVE_CENTS_VALUE;
+
+            totalLabel.Text = total.ToString("c");
+
+        }
+
+        private void fiftyCentPictureBox_Click(object sender, EventArgs e)
+        {
+            // add value of 50
+            total += FIFTY_CENTS_VALUE;
+
+            totalLabel.Text = total.ToString("c");
+
+        }
+    }
+}
+
