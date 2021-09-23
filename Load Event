@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.IO;
+
+
+namespace Load_Event
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                // declare variable
+                string countryName;
+
+                // declare steamreader variable
+                StreamReader inputFile;
+
+                // open file
+                inputFile = File.OpenText("Countries.txt");
+                // read files contents
+                while (!inputFile.EndOfStream)
+                {
+                    // get country name 
+                    countryName = inputFile.ReadLine();
+                    // add name to list box
+                    countriesListBox.Items.Add(countryName);
+                }
+
+                inputFile.Close();
+            }
+            catch (Exception ex)
+            {
+                // error message
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}
+
