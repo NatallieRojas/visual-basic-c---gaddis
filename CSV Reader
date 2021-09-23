@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.IO;
+
+namespace CSV_Reader
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void getScoresButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                StreamReader inputFile; // read file
+                string line;  // hold line from file
+                int count = 0; // student counter as loop iterates, initialized with 0
+                int total; // accumulator
+                double average; // test score average
+
+                // create a delimiter array
+                char[] delim = { ',' };
+
+                // open CSV file
+                inputFile = File.OpenText("Grades.csv"); // excel saved file
+
+                // reads contents of file until end
+                while (!inputFile.EndOfStream)
+                {
+                    // increment student counter
+                    count++;
+
+                    // read line from file
+                    line = inputFile.ReadLine();
+
+                    // get test scores as tokens
+                    string[] tokens = line.Split(delim);
+
+                    // set accumulator to 0
+                    total = 0;
+
+                    //calculate total of test score tokens
+                    foreach (string str in tokens)
+                    {
+                        // starts from 0 and each interger is added as string is read from file
+                        total += int.Parse(str);
+
+                    }
+
+                    // calculate average of these test scores double used to prevent integer divison
+                    average = (double)total / tokens.Length;
+
+                    // display the average
+                    averagesListBox.Items.Add("The average for student " + count + " is " + average.ToString("n1"));
+
+                }
+
+                //close the file
+
+                inputFile.Close();
+
+            }
+            catch (Exception ex)
+            {
+                // display error message.
+                MessageBox.Show(ex.Message);
+
+            }
+
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            // close the form.
+            this.Close();
+        }
+    }
+}
+
