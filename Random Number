@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+//necessary for streamreader 
+using System.IO;
+
+namespace Random_Number
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void calculateButton_Click(object sender, EventArgs e)
+        {
+            // declare int variable 
+            int numbers;
+            // declare int random number variable
+            int randomNumber;
+            // create random object 
+            Random rand = new Random();
+            // declare a steamwriter variable.
+            StreamWriter outputFile;
+            // parse to read string to number with numbers more than 0 
+            if (int.TryParse(numbersTextBox.Text, out numbers) && numbers > 0)
+            {
+                //used to creat savefile dialog control 
+                if (saveFile.ShowDialog() == DialogResult.OK)
+                {
+                    // create selected file
+                    outputFile = File.CreateText(saveFile.FileName);
+
+                    // to write numbers 1 through 100 to file - pg 304
+                    for (int count = 1; count <= numbers; count++)
+                    {
+                        // how to write random number 1 - 100
+                        randomNumber = rand.Next(100) + 1;
+                        // write numbers to file
+                        outputFile.WriteLine(randomNumber);
+                    }
+
+                    // close file
+                    outputFile.Close();
+
+                    // display action completed to user
+                    MessageBox.Show("Completed " + numbers + " random numbers have been added and written to \n \n \"" + saveFile.FileName + "\"");
+
+                    // clear text box 
+                    numbersTextBox.Clear();
+                    numbersTextBox.Focus();
+
+                }
+                else
+                {
+                    // error message 
+                    MessageBox.Show("Cancelled");
+                    numbersTextBox.Focus();
+
+                }
+
+
+            }
+            else
+            {
+
+                // error message if wrong integer
+                MessageBox.Show("Please enter interger greater than 0 and less than 100");
+                numbersTextBox.Clear();
+                numbersTextBox.Focus();
+            }
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            // close program 
+            this.Close();
+        }
+    }
+}
+
